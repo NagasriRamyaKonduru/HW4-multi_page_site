@@ -6,6 +6,11 @@ editor_options:
   chunk_output_type: inline
 ---
 
+---
+title: "Homework 4 – Task 1"
+format: html
+---
+
 # Task - 1
 
 1.  If your working directory is myfolder/homework/, what relative path would you specify to get the file located at myfolder/MyData.csv?\
@@ -35,6 +40,11 @@ editor_options:
 
 
     ```
+
+---
+title: "Glass Data"
+format: html
+---
 
 # Task - 2
 
@@ -81,7 +91,12 @@ glass_filtered <- glass %>%
 glass_filtered
 ```
 
-Part B : Yeast Data
+---
+title: "Yeast Data"
+format: html
+---
+
+# Part B : Yeast Data
 
 1.  
 
@@ -114,6 +129,11 @@ yeast_summary <- yeast %>%
 
 yeast_summary
 ```
+
+---
+title: "Wine Data"
+format: html
+---
 
 # Task 3 : Combining Excel and Delimited Data
 
