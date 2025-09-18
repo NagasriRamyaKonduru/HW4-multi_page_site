@@ -7,4 +7,24 @@ editor_options:
 ---
 
 
-Answers go here!
+Task - 1
+
+If your working directory is myfolder/homework/, what relative path would you specify to get the file located at myfolder/MyData.csv?../MyData.csv
+
+What are the major benefits of using R projects?> R Projects keep your working directory consistent, organize all files/code/data in one place, and make your analysis reproducible.> They also help with version control, collaboration, and avoiding path errors since everything is relative to the project folder.
+
+What is git and what is github?> Git is a version control system that tracks changes in code and allows you to manage different versions.> GitHub is a cloud-based platform that hosts git repositories, making it easier to collaborate, share, and back up code.
+
+What are the two main differences between a tibble and a data.frame?> (1) Tibbles print in a cleaner format, showing only the first 10 rows and fitting the screen width.> (2) Tibbles do not automatically convert strings to factors, while data.frames often do.
+
+Rewrite the following nested function call using Base R’s chaining operator:
+
+```{r}
+library(tidyverse)
+iris |>
+  as_tibble() |>
+  select(starts_with("Petal"), Species) |>
+  filter(Petal.Length < 1.55) |>
+  arrange(Species)
+
+```

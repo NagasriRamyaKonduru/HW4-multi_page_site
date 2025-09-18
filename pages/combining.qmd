@@ -6,4 +6,131 @@ editor_options:
   chunk_output_type: inline
 ---
 
-Answers go here!
+---
+title: "Wine Data"
+format: html
+---
+
+Task 3 : Combining Excel and Delimited Data
+
+1. Import White Wine Excel Data
+
+```{r}
+library(readxl)
+library(tidyverse)
+
+# Read first sheet
+white <- read_excel("white-wine.xlsx", sheet = 1)
+
+# Print tibble
+white
+
+```
+
+2. Fix Varibale names
+```{r}
+# Read the alternative variable names
+names_fix <- read_excel("white-wine.xlsx", sheet = 2)[[1]]
+
+# Overwrite column names
+colnames(white) <- names_fix
+
+# Add column to mark wine type
+white <- white %>% mutate(type = "white")
+
+white
+```
+
+3. Import Red Wine CSV Data
+
+```{r}
+# Read semi-colon delimited red wine data
+red <- read_delim(
+  "https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv",
+  delim = ";"
+)
+
+# Fix column names
+colnames(red) <- names_fix
+
+# Add column to mark wine type
+red <- red %>% mutate(type = "red")
+
+red
+
+```
+4. Combine White and Red Wine Data
+
+```{r}
+# Read semi-colon delimited red wine data
+red <- read_delim(
+  "https://www4.stat.ncsu.edu/~online/datasets/red-wine.csv",
+  delim = ";"
+)
+
+# Fix column names
+colnames(red) <- names_fix
+
+# Add column to mark wine type
+red <- red %>% mutate(type = "red")
+
+red
+```
+
+5. Filter for high quality and reasonable alcohol
+
+```{r}
+# Combine white and red into one tibble
+wine <- dplyr::bind_rows(white, red)
+
+# Print to check result
+wine
+
+```
+6. Sort by Quality (High -> Low)
+
+```{r}
+wine_filtered <- wine %>%
+  filter(quality > 6.5, alcohol < 132)
+
+wine_filtered
+```
+
+7. Keep only Acid Variables, Alcohol, Type, Quality
+
+```{r}
+wine_sorted <- wine_filtered %>%
+  arrange(desc(quality))
+
+wine_subset <- wine_sorted %>%
+  select(contains("acid"), alcohol, type, quality)
+
+wine_subset
+```
+
+8. Add Mean and Standard Deviation of Alcohol - by quality
+
+```{r}
+wine_summary <- wine_subset %>%
+  group_by(quality) %>%
+  mutate(
+    mean_alcohol = mean(alcohol),
+    sd_alcohol = sd(alcohol)
+  )
+
+wine_summary
+```
+
+9. 
+```{r}
+wine_summary <- wine_subset %>%
+  group_by(quality) %>%
+  summarise(
+    mean_alcohol = mean(alcohol),
+    sd_alcohol = sd(alcohol),
+    .groups = "drop"
+  )
+
+wine_summary
+```
+
